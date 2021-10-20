@@ -1,13 +1,161 @@
-body {
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
+
+* {
+  font-family: 'Roboto', sans-serif;
+
+  /* Default styling */
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+body {
+  /* Default React CSS */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  /* Default React CSS */
+
+  background-color: #202023;
+}
+
+/* GLOBAL STYLING */
+
+h1, h2, h3, h4, h5, h6, p, a, span {
+  color: #FFFFFFEB;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  line-height: 1.25;
+}
+
+p {
+  line-height: 1.5;
+  font-size: 16px;
+}
+
+a {
+  text-decoration: none;
+}
+
+li {
+  list-style: none;
+}
+
+.pink {
+  color: #FF63C3;
+}
+
+.btn {
+  background-color: #FFFFFFEB;
+  color: #202023;
+  font-size: 16px;
+  padding: 8px 16px;
+  border-radius: 8px;
+  border: none;
+  transition: all 300ms ease;
+}
+
+.btn:hover {
+  background: #FF63C3;
+  cursor: pointer;
+}
+
+.dog__img {
+  object-fit: cover;
+  width: 100%;
+  border-radius: 8px;
+}
+
+/* NAV */
+
+nav {
+  height: 100px;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 16px;
+}
+
+.nav__logo {
+  font-size: 32px;
+}
+
+.nav__links {
+  display: flex;
+  align-items: center;
+}
+
+.nav__list {
+  margin-left: 16px;
+}
+
+.nav__list--link {
+  cursor: not-allowed;
+}
+
+.nav__list--link:hover {
+  text-decoration: underline;
+}
+
+/* HEADER / LANDING */
+
+header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: calc(100vh - 100px);
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 16px;
+}
+
+#dog {
+  width: 100%;
+}
+
+.header__title {
+  text-align: center;
+  margin-bottom: 50px;
+}
+
+.dog--wrapper {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.dog__main {
+  height: 350px;
+}
+
+/* SEPARATOR */
+
+.separator {
+  height: 3px;
+  background-color: #FF63C3;
+  border-radius: 24px;
+  width: 100%;
+  margin: 40px 0;
+}
+
+/* FAVOURITE DOGS */
+
+.dog__fav--wrapper {
+  display: flex;
+  width: 20%;
+  padding: 2px;
+}
+
+.dog__fav--img {
+  height: 100px;
+}
+
+.dog__fav {
+  display: flex;
+  flex-flow: row wrap;
 }
