@@ -1,9 +1,12 @@
 import React from 'react';
+import Dog from './Components/Dog';
+import FavouriteDog from './Components/FavouriteDog';
 
 function App() {
   return (
     <div className="App">
-      <h1>Testing!</h1>
+      <Dog />
+      <FavouriteDog />
     </div>
   );
 }
