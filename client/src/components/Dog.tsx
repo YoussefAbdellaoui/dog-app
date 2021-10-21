@@ -1,17 +1,26 @@
-import React, { useCallback, useState } from "react";
+import React, { useEffect, useState } from "react";
 import Picture from "./Picture";
 
 const Dog = () => {
   const [newDog, setNewDog] = useState(Object);
-  // const dogArray: Array<String> = [];
 
-  const getDog = useCallback(() => {
-    console.log("Called New Dog");
-    fetch("https://dog.ceo/api/breeds/image/random")
-      .then((res) => res.json())
-      .then((result) => {
-        setNewDog(result.message);
-      });
+  const getDog = async () => {
+    try {
+      const response = await fetch("https://dog.ceo/api/breeds/image/random");
+      const data = await response.json();
+      return data;
+    } catch (e) {
+      console.error(e);
+    }
+  };
+
+  const fetchDog = async () => {
+    const dog = await getDog();
+    setNewDog(dog.message);
+  };
+
+  useEffect(() => {
+    fetchDog();
   }, []);
 
   // useEffect? Empty object on initial page load, unsure how to show an image on first load
@@ -42,9 +51,7 @@ const Dog = () => {
 
         <div className="next">
           <div className="next--wrapper">
-            <button className="btn btn--next" onClick={getDog}>
-              Next
-            </button>
+            <button className="btn btn--next">Next</button>
           </div>
         </div>
       </div>
