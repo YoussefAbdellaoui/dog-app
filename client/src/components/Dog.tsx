@@ -3,6 +3,8 @@ import Picture from "./Picture";
 
 const Dog = () => {
   const [newDog, setNewDog] = useState(Object);
+  const [next, setNext] = useState(false);
+  // const [dogArray, setDogArray] = useState([]);
 
   const getDog = async () => {
     try {
@@ -20,8 +22,10 @@ const Dog = () => {
   };
 
   useEffect(() => {
+    console.log("Called effect");
     fetchDog();
-  }, []);
+    setNext(false);
+  }, [next]);
 
   // useEffect? Empty object on initial page load, unsure how to show an image on first load
   // Find a way to push the value to an array
@@ -51,7 +55,9 @@ const Dog = () => {
 
         <div className="next">
           <div className="next--wrapper">
-            <button className="btn btn--next">Next</button>
+            <button className="btn btn--next" onClick={() => setNext(!next)}>
+              Next
+            </button>
           </div>
         </div>
       </div>
