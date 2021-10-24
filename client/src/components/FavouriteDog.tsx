@@ -1,53 +1,22 @@
 import React from "react";
-import DogOne from "../assets/dog1.jpg";
 
-const FavouriteDog = () => {
+interface Props {
+  favouriteDogs: Array<string>;
+}
+
+const FavouriteDog: React.FC<Props> = ({ favouriteDogs }) => {
   return (
     <section id="favourite">
-      <h1 className="header__title">
+      <h1 className="header__title favourite__title">
         <span className="pink">Favourite</span> Dogs
       </h1>
 
       <div className="dog__fav">
-        <figure className="dog__fav--wrapper">
-          <img src={DogOne} alt="" className="dog__img dog__fav--img" />
-        </figure>
-
-        <figure className="dog__fav--wrapper">
-          <img src={DogOne} alt="" className="dog__img dog__fav--img" />
-        </figure>
-
-        <figure className="dog__fav--wrapper">
-          <img src={DogOne} alt="" className="dog__img dog__fav--img" />
-        </figure>
-
-        <figure className="dog__fav--wrapper">
-          <img src={DogOne} alt="" className="dog__img dog__fav--img" />
-        </figure>
-
-        <figure className="dog__fav--wrapper">
-          <img src={DogOne} alt="" className="dog__img dog__fav--img" />
-        </figure>
-
-        <figure className="dog__fav--wrapper">
-          <img src={DogOne} alt="" className="dog__img dog__fav--img" />
-        </figure>
-
-        <figure className="dog__fav--wrapper">
-          <img src={DogOne} alt="" className="dog__img dog__fav--img" />
-        </figure>
-
-        <figure className="dog__fav--wrapper">
-          <img src={DogOne} alt="" className="dog__img dog__fav--img" />
-        </figure>
-
-        <figure className="dog__fav--wrapper">
-          <img src={DogOne} alt="" className="dog__img dog__fav--img" />
-        </figure>
-
-        <figure className="dog__fav--wrapper">
-          <img src={DogOne} alt="" className="dog__img dog__fav--img" />
-        </figure>
+        {favouriteDogs.map((dog) => (
+          <figure key={dog} className="dog__fav--wrapper">
+            <img src={dog} alt="" className="dog__img dog__fav--img" />
+          </figure>
+        ))}
       </div>
     </section>
   );
