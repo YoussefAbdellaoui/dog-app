@@ -1,5 +1,5 @@
 # Welcome to Dog App
----
+
 ### Technologies used:
 - Typescript
 - React Frontend
