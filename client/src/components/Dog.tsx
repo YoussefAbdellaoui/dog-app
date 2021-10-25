@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import FavouriteDog from "./FavouriteDog";
 import Picture from "./ui/Picture";
 
-const Dog = () => {
+const Dog: React.FC = () => {
   // Generic dog state used to display the current dog
   const [newDog, setNewDog] = useState(Object);
 
@@ -14,8 +14,8 @@ const Dog = () => {
   const [favDogArray, setFavDogArray] = useState<string[]>([]);
 
   // Error states for showing in the UI
-  const [prevDogError, setPrevDogError] = useState(false);
-  const [favDogError, setFavDogError] = useState(false);
+  const [prevDogError, setPrevDogError] = useState<boolean>(false);
+  const [favDogError, setFavDogError] = useState<boolean>(false);
 
   // Query the API for a dog
   const getDog = async () => {
