@@ -1,0 +1,15 @@
+{
+    "dogs": [
+        "https://images.dog.ceo/breeds/setter-irish/n02100877_2599.jpg",
+        "https://images.dog.ceo/breeds/terrier-westhighland/n02098286_4362.jpg",
+        "https://images.dog.ceo/breeds/cotondetulear/IMAG1063.jpg]"
+    ],
+    "dogFavourites": [
+        "https://images.dog.ceo/breeds/buhund-norwegian/hakon1.jpg",
+        "https://images.dog.ceo/breeds/leonberg/n02111129_4533.jpg"
+    ],
+    "test": {
+        "Hello": "World",
+        "World": 5
+    }
+}
