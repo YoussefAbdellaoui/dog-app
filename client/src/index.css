@@ -60,10 +60,20 @@ li {
   cursor: pointer;
 }
 
+.btn:active {
+  transform: scale(0.85);
+}
+
 .dog__img {
   object-fit: cover;
   width: 100%;
   border-radius: 8px;
+}
+
+.error {
+  border: 2px solid #FF63C3;
+  border-radius: 8px;
+  padding: 6px 16px;
 }
 
 /* NAV */
@@ -126,10 +136,23 @@ header {
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  position: relative;
 }
 
 .fav__btn--wrapper {
-  margin: 32px 0;
+  display: flex;
+  align-items: center;
+  margin-top: 16px;
+}
+
+.btn--fav {
+  margin-bottom: 16px;
+}
+
+.fav__error {
+  position: absolute;
+  top: 16px;
+  right: 310px;
 }
 
 .dog__main {
@@ -147,6 +170,12 @@ header {
 
 .previous {
   left: 0;
+  display: flex;
+  align-items: center;
+}
+
+.previous__error {
+  margin-left: 16px;
 }
 
 .next {
@@ -200,8 +229,6 @@ header {
 .dog__fav--wrapper {
   display: flex;
   min-width: 20%;
-  overflow: hidden;
-  padding: 2px;
 }
 
 .favourite__title {
@@ -209,5 +236,5 @@ header {
 }
 
 .dog__fav--img {
-  height: 100px;
+  height: 115px;
 }
