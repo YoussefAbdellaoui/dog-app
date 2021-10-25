@@ -16,7 +16,6 @@ const FavouriteDog: React.FC<FavouriteDogProps> = ({
       </h1>
 
       <div className="dog__fav">
-        {/* better to use forEach since we're not using map's value? */}
         {favouriteDogs.map((dog) => (
           <figure key={dog} className="dog__fav--wrapper">
             <img
