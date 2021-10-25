@@ -1,11 +1,14 @@
 import React from "react";
 
-interface Props {
+interface FavouriteDogProps {
   favouriteDogs: Array<string>;
-  removeFav: (event: React.MouseEvent<HTMLImageElement>) => void;
+  removeFav(e: React.MouseEvent<HTMLImageElement>): void;
 }
 
-const FavouriteDog: React.FC<Props> = ({ favouriteDogs, removeFav }) => {
+const FavouriteDog: React.FC<FavouriteDogProps> = ({
+  favouriteDogs,
+  removeFav,
+}) => {
   return (
     <section id="favourite">
       <h1 className="header__title favourite__title">
@@ -20,7 +23,7 @@ const FavouriteDog: React.FC<Props> = ({ favouriteDogs, removeFav }) => {
               src={dog}
               alt=""
               className="dog__img dog__fav--img"
-              onClick={() => removeFav}
+              onClick={(e) => removeFav(e)}
             />
           </figure>
         ))}

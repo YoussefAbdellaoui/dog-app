@@ -53,23 +53,32 @@ const Dog = () => {
   };
 
   const favDog = () => {
-    // Check if the favourite dog already exists
+    // Check if the favourite dog already exists in the array
     const checkFav = favDogArray.find((element) => newDog === element);
-
-    // If we find the current dog in the array already
+    // If we find the current dog in the array already then disable the button
     if (checkFav) {
       setFavDogError(true);
       return;
     }
 
+    // Disable the favourite button once we add it to the array
+    setFavDogError(true);
+
     // Add the dog to the favourite dog array
     setFavDogArray([...favDogArray, newDog]);
   };
 
-  const removeFav = () => {
-    console.log("testing");
+  const removeFav = (e: React.MouseEvent<HTMLImageElement>) => {
+    // e.currentTarget.src
+    setFavDogArray(favDogArray.filter((dog) => dog !== e.currentTarget.src));
+
+    // Remove the disabled button if the favourite removed is the current dog
+    if (e.currentTarget.src === newDog) {
+      setFavDogError(false);
+    }
   };
 
+  // Get the previous dog on "previous" button press
   const prevDog = () => {
     // Get the index of the previous dog
     const previousDogIndex = dogArray.indexOf(newDog) - 1;
@@ -89,8 +98,9 @@ const Dog = () => {
     setNewDog(dogArray[previousDogIndex]);
   };
 
+  // Get a new dog on "next" button press
   const nextDog = () => {
-    // If we're showing the previous dog error then remove it
+    // Remove the the prevDogError from the UI if it exists
     if (prevDogError) {
       setPrevDogError(false);
     }
@@ -126,26 +136,43 @@ const Dog = () => {
 
         <div className="dog--wrapper">
           <div className="fav__btn--wrapper">
-            <button className="btn btn--fav" onClick={favDog}>
-              Favourite
-            </button>
-            {favDogError && (
-              <span className="error fav__error">
-                Favourite already exists!
-              </span>
+            {favDogError ? (
+              <>
+                <button className="btn--disabled btn--fav" onClick={favDog}>
+                  Favourite
+                </button>
+                <span className="error fav__error">
+                  Favourite already exists!
+                </span>
+              </>
+            ) : (
+              <button className="btn btn--fav" onClick={favDog}>
+                Favourite
+              </button>
             )}
           </div>
 
           <div className="dog__main">
             <div className="previous">
               <div className="previous--wrapper">
-                <button className="btn btn--prev" onClick={prevDog}>
-                  Previous
-                </button>
+                {prevDogError ? (
+                  <>
+                    <button
+                      className="btn--disabled btn--prev"
+                      onClick={prevDog}
+                    >
+                      Previous
+                    </button>
+                    <span className="error previous__error">
+                      No Previous Dog!
+                    </span>
+                  </>
+                ) : (
+                  <button className="btn btn--prev" onClick={prevDog}>
+                    Previous
+                  </button>
+                )}
               </div>
-              {prevDogError && (
-                <span className="error previous__error">No Previous Dog!</span>
-              )}
             </div>
 
             <div className="picture">
@@ -163,7 +190,7 @@ const Dog = () => {
         </div>
       </section>
       <div className="separator"></div>
-      <FavouriteDog favouriteDogs={favDogArray} removeFav={() => removeFav} />
+      <FavouriteDog favouriteDogs={favDogArray} removeFav={removeFav} />
     </>
   );
 };

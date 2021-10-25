@@ -22,7 +22,7 @@
 
 
 - Favourite dogs should be stored in the JSONdb
-    - Should be able to remove favourite dogs
+    - Should be able to remove favourite dogs ✅
     - The favourite dogs should persist when the page reloads
 
 
