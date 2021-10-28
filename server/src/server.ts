@@ -37,20 +37,44 @@ app.get('/', (req: Request, res: Response): void => {
 // const result = db.getObject<FooBar>('/test');
 // res.send(result);
 
+// TS Interface for the objects
+interface Dog {
+  breed: string,
+  id: string
+};
+interface Dogs extends Array<Dog>{};
+
+// DOGS
 app.get('/dogs', (req: Request, res: Response): void => {
-  const dogArray = db.getData("/dogs");
+  const dogArray = db.getData("/");
   res.send(dogArray);
 });
 
+// Add a new dog to the db
 app.get('/dogs/:breed/:id', (req: Request, res: Response): void => {
-  res.json(
-    { breed: req.params.breed, id: req.params.id }
-  )
+  res.json({ breed: req.params.breed, id: req.params.id });
+
+
+  const dogObject = [{ breed: req.params.breed, id: req.params.id }] as Dogs;
+
+  // last parameter = override the data or not (false will merge it)
+  db.push('/dogs', dogObject, false);
 });
 
+// FAVOURITE DOGS
 app.get('/favourites', (req: Request, res: Response): void => {
   const dogFavourites = db.getData('/dogFavourites');
   res.send(dogFavourites);
+});
+
+// Add a new favourite dog to the db
+app.get('/dogFavourites/:breed/:id', (req: Request, res: Response): void => {
+  res.json({ breed: req.params.breed, id: req.params.id });
+
+  const favDogObject = [{ breed: req.params.breed, id: req.params.id }] as Dogs;
+
+  // last parameter = override the data or not (false will merge it)
+  db.push('/dogFavourites', favDogObject, false);
 });
 
 app.listen(port, () => {

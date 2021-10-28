@@ -33,15 +33,21 @@ const Dog: React.FC = () => {
     const databaseDogs = await getDatabaseDogs();
     console.log("Dogs in Database: ", databaseDogs);
 
-    const databaseArray = databaseDogs.map(
+    // Map the dogs from the database to its own variable
+    // Better than setting state in a loop continously
+    const databaseDogArray = databaseDogs.dogs.map(
       (element: { breed: string; id: string }) =>
         `https://images.dog.ceo/breeds/${element.breed}/${element.id}.jpg`
     );
+    setDogArray([...databaseDogArray]);
 
-    setDogArray(databaseArray);
+    // Map the favourite dogs from the database to its own variable
+    const databaseFavouritesArray = databaseDogs.dogFavourites.map(
+      (element: { breed: string; id: string }) =>
+        `https://images.dog.ceo/breeds/${element.breed}/${element.id}.jpg`
+    );
+    setFavDogArray([...databaseFavouritesArray]);
   };
-
-  console.log("Array outside of functions:", dogArray);
 
   // Query the API for a dog
   const getDog = async () => {
@@ -56,6 +62,7 @@ const Dog: React.FC = () => {
 
   // Fetch a new dog from the API
   const fetchDog = async () => {
+    console.log("Array at start of fetchDog:", dogArray);
     // Show loading state on screen
     setLoading(true);
 
@@ -74,7 +81,12 @@ const Dog: React.FC = () => {
     }
 
     // Otherwise just add the current dog to the array
-    setDogArray([...dogArray, dog.message]);
+    // We use a callback on setState to wait for the previous state to finish first
+    setDogArray((prevDogs) => {
+      console.log("prevDogs: ", prevDogs);
+      return [...prevDogs, dog.message];
+    });
+
     setLoading(false);
   };
 
@@ -150,9 +162,12 @@ const Dog: React.FC = () => {
 
   // Load the dog on initial page load
   useEffect(() => {
-    fetchDatabaseDogs();
+    const loadDogs = async () => {
+      await fetchDatabaseDogs();
+      await fetchDog();
+    };
 
-    fetchDog();
+    loadDogs();
   }, []);
 
   return (

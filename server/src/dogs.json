@@ -7,6 +7,14 @@
         {
             "breed": "mastiff-tibetan",
             "id": "n02108551_1380"
+        },
+        {
+            "breed": "greyhound-italian",
+            "id": "n02091032_1248"
+        },
+        {
+            "breed": "mountain-swiss",
+            "id": "n02107574_1083"
         }
     ],
     "dogFavourites": [
@@ -17,6 +25,14 @@
         {
             "breed": "leonberg",
             "id": "n02111129_4533"
+        },
+        {
+            "breed": "mountain-swiss",
+            "id": "n02107574_1083"
+        },
+        {
+            "breed": "spaniel-brittany",
+            "id": "n02101388_6077"
         }
     ]
 }
