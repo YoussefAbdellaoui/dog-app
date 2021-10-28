@@ -1,14 +1,22 @@
 {
     "dogs": [
-        "https://images.dog.ceo/breeds/lhasa/n02098413_2584.jpg",
-        "https://images.dog.ceo/breeds/mastiff-tibetan/n02108551_1380.jpg"
+        {
+            "breed": "lhasa",
+            "id": "n02098413_2584"
+        },
+        {
+            "breed": "mastiff-tibetan",
+            "id": "n02108551_1380"
+        }
     ],
     "dogFavourites": [
-        "https://images.dog.ceo/breeds/buhund-norwegian/hakon1.jpg",
-        "https://images.dog.ceo/breeds/leonberg/n02111129_4533.jpg"
-    ],
-    "test": {
-        "Hello": "World",
-        "World": 5
-    }
+        {
+            "breed": "buhund-norwegian",
+            "id": "hakon1"
+        },
+        {
+            "breed": "leonberg",
+            "id": "n02111129_4533"
+        }
+    ]
 }

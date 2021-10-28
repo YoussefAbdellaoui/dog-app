@@ -17,6 +17,32 @@ const Dog: React.FC = () => {
   const [prevDogError, setPrevDogError] = useState<boolean>(false);
   const [favDogError, setFavDogError] = useState<boolean>(false);
 
+  // Query the database for our dogs
+  const getDatabaseDogs = async () => {
+    try {
+      const response = await fetch("http://localhost:8080/dogs");
+      const data = await response.json();
+      return data;
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
+  // Fetch the data from the query
+  const fetchDatabaseDogs = async () => {
+    const databaseDogs = await getDatabaseDogs();
+    console.log("Dogs in Database: ", databaseDogs);
+
+    const databaseArray = databaseDogs.map(
+      (element: { breed: string; id: string }) =>
+        `https://images.dog.ceo/breeds/${element.breed}/${element.id}.jpg`
+    );
+
+    setDogArray(databaseArray);
+  };
+
+  console.log("Array outside of functions:", dogArray);
+
   // Query the API for a dog
   const getDog = async () => {
     try {
@@ -124,6 +150,8 @@ const Dog: React.FC = () => {
 
   // Load the dog on initial page load
   useEffect(() => {
+    fetchDatabaseDogs();
+
     fetchDog();
   }, []);
 
