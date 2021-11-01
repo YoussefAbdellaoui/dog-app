@@ -45,7 +45,7 @@ app.get('/favourites', (req: Request, res: Response): void => {
 
 // Add a new favourite dog to the db
 app.post('/newFavourite', (req: Request, res: Response): void => {
-  const favDogObject = [{ breed: req.body.breed, id: req.body.id }] as Dogs
+  const favDogObject: Dogs = [{ breed: req.body.breed, id: req.body.id }]
   db.push('/dogFavourites', favDogObject, false);
   
   // Send the dog we added as a response to the client

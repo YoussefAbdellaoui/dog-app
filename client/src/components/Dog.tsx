@@ -3,9 +3,14 @@ import React, { useEffect, useState } from "react";
 import FavouriteDog from "./FavouriteDog";
 import Picture from "./ui/Picture";
 
+interface Dog {
+  message: string;
+  status?: string;
+}
+
 const Dog: React.FC = () => {
   // Generic dog state used to display the current dog
-  const [newDog, setNewDog] = useState(Object);
+  const [newDog, setNewDog] = useState<string>("");
 
   // Loading state
   const [loading, setLoading] = useState<boolean>(true);
@@ -42,7 +47,7 @@ const Dog: React.FC = () => {
   };
 
   // Query the API for a dog
-  const getDog = async (): Promise<Object | undefined> => {
+  const getDog = async (): Promise<Dog | undefined> => {
     try {
       const response = await axios.get(
         "https://dog.ceo/api/breeds/image/random"
@@ -59,12 +64,12 @@ const Dog: React.FC = () => {
     // Show loading state on screen
     setLoading(true);
 
-    interface Dog {
-      message: string;
-      status: string;
+    const dog: Dog | undefined = await getDog();
+
+    if (!dog) {
+      return;
     }
 
-    const dog = (await getDog()) as Dog;
     setNewDog(dog.message);
 
     // Check if there are 10 dogs stored in the array & remove the first index
