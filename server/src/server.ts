@@ -18,63 +18,48 @@ app.use(express.static(path.resolve('./') + '../../build/client'));
 // Enable CORS
 app.use((req: Request, res: Response, next: NextFunction) => {
   res.append('Access-Control-Allow-Origin', '*');
+  res.append('Access-Control-Allow-Headers', '*');
+  res.append('Access-Control-Allow-Methods', '*');
   next();
 });
+
+// Parsing body data
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
 
 app.get('/', (req: Request, res: Response): void => {
   res.sendFile(path.resolve('./') + '../../build/client/index.html');
 });
 
-
-// Pushing data into database with the wanted data path
-// By default the push overrides the old value
-// interface FooBar {
-//   Hello: string;
-//   World: number;
-// }
-// const object = { Hello: 'World', World: 5 } as FooBar;
-// db.push('/test', object);
-// const result = db.getObject<FooBar>('/test');
-// res.send(result);
-
-// TS Interface for the objects
 interface Dog {
   breed: string,
   id: string
 };
 interface Dogs extends Array<Dog>{};
 
-// DOGS
-app.get('/dogs', (req: Request, res: Response): void => {
-  const dogArray = db.getData("/");
-  res.send(dogArray);
-});
-
-// Add a new dog to the db
-app.get('/dogs/:breed/:id', (req: Request, res: Response): void => {
-  res.json({ breed: req.params.breed, id: req.params.id });
-
-
-  const dogObject = [{ breed: req.params.breed, id: req.params.id }] as Dogs;
-
-  // last parameter = override the data or not (false will merge it)
-  db.push('/dogs', dogObject, false);
-});
-
-// FAVOURITE DOGS
 app.get('/favourites', (req: Request, res: Response): void => {
+  // Send the favourite dogs in the database as a response
   const dogFavourites = db.getData('/dogFavourites');
   res.send(dogFavourites);
 });
 
 // Add a new favourite dog to the db
-app.get('/dogFavourites/:breed/:id', (req: Request, res: Response): void => {
-  res.json({ breed: req.params.breed, id: req.params.id });
-
-  const favDogObject = [{ breed: req.params.breed, id: req.params.id }] as Dogs;
-
-  // last parameter = override the data or not (false will merge it)
+app.post('/newFavourite', (req: Request, res: Response): void => {
+  const favDogObject = [{ breed: req.body.breed, id: req.body.id }] as Dogs
   db.push('/dogFavourites', favDogObject, false);
+  
+  // Send the dog we added as a response to the client
+  res.json({ breed: req.body.breed, id: req.body.id })
+});
+
+app.delete('/deleteFavourite/:id', (req: Request, res: Response): void => {
+  // Get the index of the Dog ID and remove it from the DB
+  const dbIndex = db.getIndex('/dogFavourites', req.params.id);
+  db.delete(`/dogFavourites[${dbIndex}]`);
+
+  // Send the new db array as a response to confirm it's been deleted
+  const dogFavourites = db.getData('/dogFavourites');
+  res.send(dogFavourites);
 });
 
 app.listen(port, () => {

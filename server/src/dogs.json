@@ -1,38 +1,36 @@
 {
-    "dogs": [
-        {
-            "breed": "lhasa",
-            "id": "n02098413_2584"
-        },
-        {
-            "breed": "mastiff-tibetan",
-            "id": "n02108551_1380"
-        },
-        {
-            "breed": "greyhound-italian",
-            "id": "n02091032_1248"
-        },
-        {
-            "breed": "mountain-swiss",
-            "id": "n02107574_1083"
-        }
-    ],
     "dogFavourites": [
         {
-            "breed": "buhund-norwegian",
-            "id": "hakon1"
+            "breed": "stbernard",
+            "id": "n02109525_11444"
         },
         {
-            "breed": "leonberg",
-            "id": "n02111129_4533"
+            "breed": "terrier-patterdale",
+            "id": "patterdale-terrier-1330018870tnN"
         },
         {
-            "breed": "mountain-swiss",
-            "id": "n02107574_1083"
+            "breed": "bluetick",
+            "id": "n02088632_353"
         },
         {
-            "breed": "spaniel-brittany",
-            "id": "n02101388_6077"
+            "breed": "dhole",
+            "id": "n02115913_3178"
+        },
+        {
+            "breed": "poodle-standard",
+            "id": "n02113799_7130"
+        },
+        {
+            "breed": "brabancon",
+            "id": "n02112706_2456"
+        },
+        {
+            "breed": "komondor",
+            "id": "n02105505_3617"
+        },
+        {
+            "breed": "hound-walker",
+            "id": "n02089867_1912"
         }
     ]
 }

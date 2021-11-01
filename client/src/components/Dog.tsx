@@ -1,3 +1,4 @@
+import axios from "axios";
 import React, { useEffect, useState } from "react";
 import FavouriteDog from "./FavouriteDog";
 import Picture from "./ui/Picture";
@@ -18,31 +19,22 @@ const Dog: React.FC = () => {
   const [favDogError, setFavDogError] = useState<boolean>(false);
 
   // Query the database for our dogs
-  const getDatabaseDogs = async () => {
+  const getDatabaseDogs = async (): Promise<Array<Object> | undefined> => {
     try {
-      const response = await fetch("http://localhost:8080/dogs");
-      const data = await response.json();
-      return data;
+      const response = await axios.get("http://localhost:8080/favourites");
+      return response.data;
     } catch (e) {
-      console.log(e);
+      console.error(e);
     }
   };
 
   // Fetch the data from the query
-  const fetchDatabaseDogs = async () => {
-    const databaseDogs = await getDatabaseDogs();
-    console.log("Dogs in Database: ", databaseDogs);
-
-    // Map the dogs from the database to its own variable
-    // Better than setting state in a loop continously
-    const databaseDogArray = databaseDogs.dogs.map(
-      (element: { breed: string; id: string }) =>
-        `https://images.dog.ceo/breeds/${element.breed}/${element.id}.jpg`
-    );
-    setDogArray([...databaseDogArray]);
+  const fetchDatabaseDogs = async (): Promise<void> => {
+    const databaseDogs = (await getDatabaseDogs()) as [];
 
     // Map the favourite dogs from the database to its own variable
-    const databaseFavouritesArray = databaseDogs.dogFavourites.map(
+    // Better than setting state in a loop continously
+    const databaseFavouritesArray = databaseDogs.map(
       (element: { breed: string; id: string }) =>
         `https://images.dog.ceo/breeds/${element.breed}/${element.id}.jpg`
     );
@@ -50,23 +42,29 @@ const Dog: React.FC = () => {
   };
 
   // Query the API for a dog
-  const getDog = async () => {
+  const getDog = async (): Promise<Object | undefined> => {
     try {
-      const response = await fetch("https://dog.ceo/api/breeds/image/random");
-      const data = await response.json();
-      return data;
+      const response = await axios.get(
+        "https://dog.ceo/api/breeds/image/random"
+      );
+
+      return response.data;
     } catch (e) {
       console.error(e);
     }
   };
 
   // Fetch a new dog from the API
-  const fetchDog = async () => {
-    console.log("Array at start of fetchDog:", dogArray);
+  const fetchDog = async (): Promise<void> => {
     // Show loading state on screen
     setLoading(true);
 
-    const dog = await getDog();
+    interface Dog {
+      message: string;
+      status: string;
+    }
+
+    const dog = (await getDog()) as Dog;
     setNewDog(dog.message);
 
     // Check if there are 10 dogs stored in the array & remove the first index
@@ -83,14 +81,28 @@ const Dog: React.FC = () => {
     // Otherwise just add the current dog to the array
     // We use a callback on setState to wait for the previous state to finish first
     setDogArray((prevDogs) => {
-      console.log("prevDogs: ", prevDogs);
       return [...prevDogs, dog.message];
     });
 
     setLoading(false);
   };
 
-  const favDog = () => {
+  // Utility function to format the dog link into two values (Breed & ID)
+  const formatDogLink = (link: string): Array<string> => {
+    // Slice the link all the way to the parameters so we can get the breed & id of the dog
+    const sliceDog = link.slice(30);
+
+    // Get the breed
+    const dogBreed = sliceDog.substr(0, sliceDog.indexOf("/"));
+
+    // Get the ID & remove the .jpg at the end of the string
+    const getDogId = sliceDog.substr(sliceDog.indexOf("/") + 1);
+    const dogId = getDogId.substr(0, getDogId.indexOf("."));
+
+    return [dogBreed, dogId];
+  };
+
+  const favDog = async (): Promise<void> => {
     // Check if the favourite dog already exists in the array
     const checkFav = favDogArray.find((element) => newDog === element);
     // If we find the current dog in the array already then disable the button
@@ -99,25 +111,49 @@ const Dog: React.FC = () => {
       return;
     }
 
-    // Disable the favourite button once we add it to the array
-    setFavDogError(true);
+    // Format the link so we can get the breed & ID seperately
+    const [dogBreed, dogId] = formatDogLink(newDog);
 
+    // Post it to the API
+    const postFavDog = { breed: dogBreed, id: dogId };
+    try {
+      await axios.post("http://localhost:8080/newFavourite", postFavDog);
+    } catch (e) {
+      console.error(e);
+    }
+
+    // We could use the response from the API but its easier to just add the newDog variable
     // Add the dog to the favourite dog array
     setFavDogArray([...favDogArray, newDog]);
+
+    // Disable the favourite button once we add it to the array
+    setFavDogError(true);
   };
 
-  const removeFav = (e: React.MouseEvent<HTMLImageElement>) => {
-    // e.currentTarget.src
-    setFavDogArray(favDogArray.filter((dog) => dog !== e.currentTarget.src));
+  const removeFav = async (
+    e: React.MouseEvent<HTMLImageElement>
+  ): Promise<void> => {
+    // Format the link so we can get the breed & ID seperately
+    const [_, dogId] = formatDogLink(e.currentTarget.src);
 
-    // Remove the disabled button if the favourite removed is the current dog
-    if (e.currentTarget.src === newDog) {
-      setFavDogError(false);
+    try {
+      // Set the fav dog array by filtering out the selected dog to remote
+      setFavDogArray(favDogArray.filter((dog) => dog !== e.currentTarget.src));
+
+      // Remove the disabled button if the favourite removed is the current dog
+      if (e.currentTarget.src === newDog) {
+        setFavDogError(false);
+      }
+
+      // Remove the favourite dog from the database
+      await axios.delete(`http://localhost:8080/deleteFavourite/${dogId}`);
+    } catch (e) {
+      console.error(e);
     }
   };
 
   // Get the previous dog on "previous" button press
-  const prevDog = () => {
+  const prevDog = (): void => {
     // Get the index of the previous dog
     const previousDogIndex = dogArray.indexOf(newDog) - 1;
 
@@ -137,7 +173,7 @@ const Dog: React.FC = () => {
   };
 
   // Get a new dog on "next" button press
-  const nextDog = () => {
+  const nextDog = (): void => {
     // Remove the the prevDogError from the UI if it exists
     if (prevDogError) {
       setPrevDogError(false);
