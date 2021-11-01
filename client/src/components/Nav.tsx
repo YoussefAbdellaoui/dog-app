@@ -8,12 +8,12 @@ const Nav: React.FC = () => {
       </a>
       <ul className="nav__links">
         <li className="nav__list">
-          <a href="/" className="nav__list--link">
+          <a href="#" className="nav__list--link">
             About
           </a>
         </li>
         <li className="nav__list">
-          <a href="/" className="nav__list--link">
+          <a href="#" className="nav__list--link">
             Contact
           </a>
         </li>
