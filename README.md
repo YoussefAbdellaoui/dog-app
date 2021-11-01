@@ -21,7 +21,7 @@
 - Favourite button should add the current dog to a separate UI element below the image view ✅
 
 
-- Favourite dogs should be stored in the JSONdb
+- Favourite dogs should be stored in the JSONdb ✅
     - Should be able to remove favourite dogs ✅
     - The favourite dogs should persist when the page reloads ✅
 
