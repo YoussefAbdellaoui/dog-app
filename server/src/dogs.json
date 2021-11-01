@@ -1,36 +1,52 @@
 {
     "dogFavourites": [
         {
-            "breed": "stbernard",
-            "id": "n02109525_11444"
+            "breed": "kelpie",
+            "id": "n02105412_7965"
         },
         {
-            "breed": "terrier-patterdale",
-            "id": "patterdale-terrier-1330018870tnN"
+            "breed": "terrier-toy",
+            "id": "n02087046_5347"
         },
         {
-            "breed": "bluetick",
-            "id": "n02088632_353"
+            "breed": "keeshond",
+            "id": "n02112350_7826"
         },
         {
-            "breed": "dhole",
-            "id": "n02115913_3178"
+            "breed": "otterhound",
+            "id": "n02091635_3548"
         },
         {
-            "breed": "poodle-standard",
-            "id": "n02113799_7130"
+            "breed": "sheepdog-shetland",
+            "id": "n02105855_13482"
         },
         {
-            "breed": "brabancon",
-            "id": "n02112706_2456"
+            "breed": "finnish-lapphund",
+            "id": "mochilamvan"
         },
         {
-            "breed": "komondor",
-            "id": "n02105505_3617"
+            "breed": "hound-english",
+            "id": "n02089973_3860"
         },
         {
-            "breed": "hound-walker",
-            "id": "n02089867_1912"
+            "breed": "pomeranian",
+            "id": "n02112018_5814"
+        },
+        {
+            "breed": "terrier-lakeland",
+            "id": "n02095570_3457"
+        },
+        {
+            "breed": "pointer-german",
+            "id": "n02100236_5317"
+        },
+        {
+            "breed": "frise-bichon",
+            "id": "jh-ezio-2"
+        },
+        {
+            "breed": "havanese",
+            "id": "00100trPORTRAIT_00100_BURST20191112123933390_COVER"
         }
     ]
 }

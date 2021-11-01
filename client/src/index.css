@@ -167,8 +167,8 @@ header {
 
 .fav__error {
   position: absolute;
-  top: 16px;
-  right: 310px;
+  margin-bottom: 16px;
+  margin-left: 116px;
 }
 
 .dog__main {
@@ -196,6 +196,10 @@ header {
 
 .next {
   right: 0;
+}
+
+.btn--next {
+  padding: 8px 24px;
 }
 
 .dog__main {
@@ -243,12 +247,13 @@ header {
 .dog__fav {
   display: flex;
   flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
   width: 100%;
 }
 
 .dog__fav--wrapper {
   display: flex;
-  min-width: 20%;
 }
 
 .favourite__title {
@@ -257,5 +262,42 @@ header {
 
 .dog__fav--img {
   cursor: pointer;
-  height: 115px;
+  max-height: 115px;
+  width: auto;
+}
+
+@media (max-width: 1000px) {
+  .dog__main {
+    height: 250px;
+  }
+}
+
+/* SMALL PHONES, TABLETS & LARGE SMARTPHONES */
+@media (max-width: 850px) {
+  .btn--disabled:hover~.error {
+    display: none;
+  }
+}
+
+/* SMALL PHONES & LARGE SMARTPHONES */
+@media (max-width: 625px) {
+  .header__title {
+    font-size: 20px;
+  }
+
+  .btn {
+    font-size: 12px;
+    padding: 6px 12px;
+  }
+
+  .dog__img {
+    height: 150px;
+  }
+}
+
+/* SMALL PHONES */
+@media (max-width: 400px) {
+  .dog__img {
+    height: 100px;
+  }
 }
