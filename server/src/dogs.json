@@ -51,6 +51,18 @@
         {
             "breed": "terrier-bedlington",
             "id": "n02093647_185"
+        },
+        {
+            "breed": "pointer-german",
+            "id": "n02100236_4235"
+        },
+        {
+            "breed": "hound-basset",
+            "id": "n02088238_9960"
+        },
+        {
+            "breed": "retriever-flatcoated",
+            "id": "n02099267_4562"
         }
     ]
 }

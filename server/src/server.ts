@@ -16,7 +16,7 @@ const db = new JsonDB(new Config('src/dogs', true, true, '/'));
 app.use(express.static(path.resolve('./') + '../../build/client'));
 
 // Enable CORS
-app.use((req: Request, res: Response, next: NextFunction) => {
+app.use((_req: Request, res: Response, next: NextFunction) => {
   res.append('Access-Control-Allow-Origin', '*');
   res.append('Access-Control-Allow-Headers', '*');
   res.append('Access-Control-Allow-Methods', '*');
@@ -27,7 +27,7 @@ app.use((req: Request, res: Response, next: NextFunction) => {
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
-app.get('/', (req: Request, res: Response): void => {
+app.get('/', (_req: Request, res: Response): void => {
   res.sendFile(path.resolve('./') + '../../build/client/index.html');
 });
 
@@ -37,7 +37,7 @@ interface Dog {
 };
 interface Dogs extends Array<Dog>{};
 
-app.get('/favourites', (req: Request, res: Response): void => {
+app.get('/favourites', (_req: Request, res: Response): void => {
   // Send the favourite dogs in the database as a response
   const dogFavourites = db.getData('/dogFavourites');
   res.send(dogFavourites);
