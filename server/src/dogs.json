@@ -47,6 +47,18 @@
         {
             "breed": "havanese",
             "id": "00100trPORTRAIT_00100_BURST20191112123933390_COVER"
+        },
+        {
+            "breed": "leonberg",
+            "id": "n02111129_844"
+        },
+        {
+            "breed": "hound-ibizan",
+            "id": "n02091244_3864"
+        },
+        {
+            "breed": "retriever-golden",
+            "id": "n02099601_3327"
         }
     ]
 }

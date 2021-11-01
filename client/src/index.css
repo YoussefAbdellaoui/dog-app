@@ -266,13 +266,13 @@ header {
   width: auto;
 }
 
+/* SMALL PHONES, TABLETS & LARGE SMARTPHONES */
 @media (max-width: 1000px) {
   .dog__main {
     height: 250px;
   }
 }
 
-/* SMALL PHONES, TABLETS & LARGE SMARTPHONES */
 @media (max-width: 850px) {
   .btn--disabled:hover~.error {
     display: none;

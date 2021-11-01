@@ -217,7 +217,7 @@ const Dog: React.FC = () => {
           <div className="fav__btn--wrapper">
             {favDogError ? (
               <>
-                <button className="btn--disabled btn--fav" onClick={favDog}>
+                <button className="btn--disabled btn--fav btn" onClick={favDog}>
                   Favourite
                 </button>
                 <span className="error fav__error">
@@ -237,7 +237,7 @@ const Dog: React.FC = () => {
                 {prevDogError ? (
                   <>
                     <button
-                      className="btn--disabled btn--prev"
+                      className="btn--disabled btn--prev btn"
                       onClick={prevDog}
                     >
                       Previous
