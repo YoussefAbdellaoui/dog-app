@@ -1,4 +1,7 @@
-# Welcome to Dog App
+# Welcome to Dog App!
+
+### GIF Demonstration:
+![DogApp](https://user-images.githubusercontent.com/61654084/139784195-ec6daee8-84a1-4b7f-8cfa-92daee6906ab.gif)
 
 ### Technologies used:
 - Typescript
